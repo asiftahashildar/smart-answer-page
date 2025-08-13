@@ -52,6 +52,13 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				'hero-gradient': {
+					from: 'hsl(var(--hero-gradient-from))',
+					to: 'hsl(var(--hero-gradient-to))'
+				},
+				'question-bg': 'hsl(var(--question-bg))',
+				'answer-bg': 'hsl(var(--answer-bg))',
+				'answer-accent': 'hsl(var(--answer-accent))',
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -84,11 +91,41 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'fade-in': {
+					from: {
+						opacity: '0',
+						transform: 'translateY(10px)'
+					},
+					to: {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
+				},
+				'slide-up': {
+					from: {
+						transform: 'translateY(20px)',
+						opacity: '0'
+					},
+					to: {
+						transform: 'translateY(0)',
+						opacity: '1'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in': 'fade-in 0.5s ease-out',
+				'slide-up': 'slide-up 0.3s ease-out'
+			},
+			backgroundImage: {
+				'hero-gradient': 'linear-gradient(135deg, hsl(var(--hero-gradient-from)), hsl(var(--hero-gradient-to)))',
+				'radial-gradient': 'radial-gradient(circle at center, hsl(var(--hero-gradient-from) / 0.3), transparent 50%)'
+			},
+			boxShadow: {
+				'primary': 'var(--shadow-primary)',
+				'subtle': 'var(--shadow-subtle)'
 			}
 		}
 	},
