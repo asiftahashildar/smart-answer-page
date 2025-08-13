@@ -47,8 +47,8 @@ export default function QuestionAnswer() {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const data = await response.text();
-      setAnswer(data || "I received your question and processed it successfully!");
+      const data = await response.json();
+      setAnswer(data.output || data.message || "I received your question and processed it successfully!");
       
       toast({
         title: "Answer received!",
