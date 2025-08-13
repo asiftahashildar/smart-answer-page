@@ -31,20 +31,40 @@ export default function QuestionAnswer() {
 
     setIsLoading(true);
     
-    // Simulate API call delay
-    setTimeout(() => {
-      const sampleAnswer = SAMPLE_ANSWERS[question as keyof typeof SAMPLE_ANSWERS];
-      if (sampleAnswer) {
-        setAnswer(sampleAnswer);
-      } else {
-        setAnswer("I'd be happy to help answer your question! This is a demo version, so I'm providing sample responses for specific questions. In a real implementation, this would connect to an AI service to provide comprehensive answers to any question you ask.");
+    try {
+      const response = await fetch('https://ashu007.app.n8n.cloud/webhook-test/3a63de4d-5df3-45b8-a026-1ddbe505b523', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          question: question.trim(),
+          timestamp: new Date().toISOString()
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
-      setIsLoading(false);
+
+      const data = await response.text();
+      setAnswer(data || "I received your question and processed it successfully!");
+      
       toast({
-        title: "Answer generated!",
+        title: "Answer received!",
         description: "Your question has been processed successfully.",
       });
-    }, 1500);
+    } catch (error) {
+      console.error('Error sending question:', error);
+      setAnswer("Sorry, I encountered an error while processing your question. Please try again later.");
+      toast({
+        title: "Error",
+        description: "Failed to get response. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleSampleQuestion = (sampleQuestion: string) => {
