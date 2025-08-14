@@ -32,7 +32,7 @@ export default function QuestionAnswer() {
     setIsLoading(true);
     
     try {
-      const response = await fetch('https://ashu007.app.n8n.cloud/webhook-test/3a63de4d-5df3-45b8-a026-1ddbe505b523', {
+      const response = await fetch('https://ashu007.app.n8n.cloud/webhook/3a63de4d-5df3-45b8-a026-1ddbe505b523', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
